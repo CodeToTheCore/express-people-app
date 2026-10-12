@@ -1,61 +1,29 @@
-const peoples = require("../data/people");
-const db = require("../db/dbConfig")
+const db = require("../db/dbConfig");
 
-const getAllPeople = async () =>{
-    try{
-        const people = await db.any("SELECT + FROM peoples");
-        return anime;
-    }catch(error){
-        return error;
-    }
+const getAllPeople = async () => {
+    return await db.any("SELECT * FROM people ORDER BY id");
 };
 
-
-const getOnePeople = async (peopleId) =>{
-    try{
-        const peoples = await db.one("SELECT * FROM peoples id=$1", peopleId);
-        return peoples;
-
-}catch (error){
-    return error;
-}
+const getOnePeople = async (peopleId) => {
+    return await db.oneOrNone("SELECT * FROM people WHERE id=$1", peopleId);
 };
 
-const createOnePeople = async ({name,description})=>{ // people
-    // const {name, description} = people
-    // people.name
-    // people.description
-    try{
-        const newPeople = await db.one("INSERT INTO animes (name, description)Values ($1, $2) RETURNING *", [name, description])
-        return newPeople;
-    }catch(error){
-        return error;
-    }
-}
-const updateOnePeople = async( id, people)=>{
-    const {name, description} = body;
-    try{
-        const updatePeople = await db.one("UPDATE peoples SET name=$1, description=$2 Where id=$3 RETURNING *", [name, description, id]);
-        return updatePeople;
-    }catch (error){
-        return error;
-    }
-}
+const createOnePeople = async ({ name, description }) => {
+    return await db.one("INSERT INTO people (name, description) VALUES ($1, $2) RETURNING *", [name, description]);
+};
 
-const deleteOnePeople = async (animeId) =>{
-    try{
-        const deletedPeople = await db.one("DELETE FROM people WHERE id=$1 RETURNING *", animeId);
-       return deletedPeople;
-    }catch(error){
-        return error
-    }
-}
+const updateOnePeople = async (id, { name, description }) => {
+    return await db.oneOrNone("UPDATE people SET name=$1, description=$2 WHERE id=$3 RETURNING *", [name, description, id]);
+};
 
+const deleteOnePeople = async (peopleId) => {
+    return await db.oneOrNone("DELETE FROM people WHERE id=$1 RETURNING *", peopleId);
+};
 
 module.exports = {
     getAllPeople,
     getOnePeople,
     createOnePeople,
     updateOnePeople,
-    deleteOnePeople
-}
+    deleteOnePeople,
+};

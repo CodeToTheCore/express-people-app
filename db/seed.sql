@@ -1,4 +1,4 @@
-\c peoples_dev;
+\c people_dev;
 
 INSERT INTO people (name, description) VALUES
 ('John Doe', 'Lorem ipsum dolor sit amet.'),

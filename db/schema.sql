@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS peoples_dev;
+DROP DATABASE IF EXISTS people_dev;
 
-CREATE DATABASE peoples_dev;
+CREATE DATABASE people_dev;
 
-\c animania_dev;
+\c people_dev;
 
 CREATE TABLE people (
     id SERIAL PRIMARY KEY,

@@ -1,5 +1,8 @@
-const pp = require("./app")
-// AudioParamMap.call
-app.listen(3000, ()=>{
-    console.log("listening to port 3000")
+const app = require("./app");
+require("dotenv").config();
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`listening to port ${PORT}`);
 });
